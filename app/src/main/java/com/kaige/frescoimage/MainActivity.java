@@ -6,12 +6,16 @@ import android.os.Bundle;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.backends.pipeline.PipelineDraweeController;
+import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
+/**
+ * 资料地址:https://www.fresco-cn.org/docs/requesting-multiple-images.html
+ */
 public class MainActivity extends AppCompatActivity {
     @ViewInject(R.id.image_view)
     private SimpleDraweeView draweeView;
@@ -31,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
         ViewUtils.inject(this);     //初始化
 //        Uri uri=Uri.parse(img_url);
 //        draweeView.setImageURI(uri);
-        requestImage();
+//        requestImage();
+        moreImages();
     }
     private void requestImage(){
         ImageRequest request= ImageRequestBuilder.newBuilderWithSource(Uri.parse(img_url))
@@ -39,6 +44,13 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         PipelineDraweeController controller= (PipelineDraweeController) Fresco.newDraweeControllerBuilder()
                 .setImageRequest(request).build();
+        draweeView.setController(controller);
+    }
+    private void moreImages(){
+        DraweeController controller=Fresco.newDraweeControllerBuilder()
+                .setLowResImageRequest(ImageRequest.fromUri(img_url5))
+                .setImageRequest(ImageRequest.fromUri(img_url5+"/test"))
+                .build();
         draweeView.setController(controller);
     }
 }

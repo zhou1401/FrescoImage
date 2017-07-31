@@ -6,8 +6,8 @@
     tools:context=".MainActivity">
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/image_view"
-        android:layout_width="match_parent"
-        android:layout_height="600dp"
+        android:layout_width="500dp"
+        android:layout_height="300dp"
         fresco:placeholderImage="@mipmap/ic_launcher_round"
         />
 
