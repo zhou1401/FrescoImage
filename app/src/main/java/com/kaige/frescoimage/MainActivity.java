@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ViewUtils.inject(this);     //初始化
+        ViewUtils.inject(this);
         Uri uri=Uri.parse(img_url);
         draweeView.setImageURI(uri);
     }
