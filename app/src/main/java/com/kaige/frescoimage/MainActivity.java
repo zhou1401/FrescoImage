@@ -4,7 +4,11 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.backends.pipeline.PipelineDraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.request.ImageRequest;
+import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
@@ -25,7 +29,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ViewUtils.inject(this);     //初始化
-        Uri uri=Uri.parse(img_url);
-        draweeView.setImageURI(uri);
+//        Uri uri=Uri.parse(img_url);
+//        draweeView.setImageURI(uri);
+        requestImage();
+    }
+    private void requestImage(){
+        ImageRequest request= ImageRequestBuilder.newBuilderWithSource(Uri.parse(img_url))
+                .setProgressiveRenderingEnabled(true)
+                .build();
+        PipelineDraweeController controller= (PipelineDraweeController) Fresco.newDraweeControllerBuilder()
+                .setImageRequest(request).build();
+        draweeView.setController(controller);
     }
 }
